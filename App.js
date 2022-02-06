@@ -1,17 +1,50 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
-
+import {
+  Accelerometer,
+  Barometer,
+  Gyroscope,
+  Magnetometer,
+  MagnetometerUncalibrated,
+  Pedometer,
+} from 'expo-sensors';
 export default function App() {
-  return (<View>
+  const [data, setData] = useState({
+    x: 0,
+    y: 0,
+    z: 0
+  })
+  // const [subscription, setSubscription] = useState(null);
+  // const _subscribe = () => {
+  //   setSubscription(
+  //     Gyroscope.addListener(gyroscopeData => {
+  //       setData(gyroscopeData);
+  //     })
+  //   );
+  // };
+  Gyroscope.setUpdateInterval(100);
+  Gyroscope.addListener(gyroscopeData => {
+    setData(gyroscopeData);
+  });
+  return (<View style={styles.centeredView}>
     <Pressable style={styles.button}>
-      <Text style={styles.text}>Herro</Text>
+      <View>
+        <Text style={styles.text}>yaya is really cute</Text>
+      </View>
     </Pressable>
   </View>
   );
 }
 
 const styles = StyleSheet.create({
+  centeredView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    // paddingTop: "100px"
+    backgroundColor: "red",
+    height: "100%"
+  },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
