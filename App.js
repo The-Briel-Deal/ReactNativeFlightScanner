@@ -8,6 +8,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 export default function App() {
   const [buttonBgc, setButtonBgc] = useState("black");
   const [image, setImage] = useState('https://www.whitehouse.gov/wp-content/uploads/2021/04/P20210303AS-1901-cropped.jpg')
+  const [textField, setTextField] = useState('')
   return (
     <PaperProvider>
       <ScrollView
@@ -33,6 +34,7 @@ export default function App() {
           <TextInput
             defaultValue='asdfasdf'
             textAlign='left'
+            placeholder="Put a link in me!!"
             style={{
               width: '50%',
               borderColor: 'black',
@@ -42,9 +44,13 @@ export default function App() {
               borderRadius: 5,
               // border
 
+            }}
+            value={textField}
+            onChangeText={(ct) => {
+              setTextField(ct)
             }} />
           <Pressable
-            style={{ ...styles.button, backgroundColor: buttonBgc }}
+            style={{ ...styles.button, backgroundColor: buttonBgc, borderRadius: 5 }}
             onPressIn={() => {
               setButtonBgc("grey")
             }}
@@ -52,11 +58,11 @@ export default function App() {
               setButtonBgc("black")
             }}
             onPress={() => {
-              setImage('https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg')
+              setImage(textField)
             }}
           >
             <View>
-              <Text style={{ ...styles.text }}>yaya is really cute</Text>
+              <Text style={{ ...styles.text, color: "white" }}>Change Picture!</Text>
             </View>
           </Pressable>
         </View>
