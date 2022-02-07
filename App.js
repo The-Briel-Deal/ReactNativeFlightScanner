@@ -1,39 +1,67 @@
 import { StatusBar } from 'expo-status-bar';
+import react from 'react';
 import { useState } from 'react';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
-import {
-  Accelerometer,
-  Barometer,
-  Gyroscope,
-  Magnetometer,
-  MagnetometerUncalibrated,
-  Pedometer,
-} from 'expo-sensors';
+import { ScrollView, Button, Pressable, StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+
+
 export default function App() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0
-  })
-  // const [subscription, setSubscription] = useState(null);
-  // const _subscribe = () => {
-  //   setSubscription(
-  //     Gyroscope.addListener(gyroscopeData => {
-  //       setData(gyroscopeData);
-  //     })
-  //   );
-  // };
-  Gyroscope.setUpdateInterval(100);
-  Gyroscope.addListener(gyroscopeData => {
-    setData(gyroscopeData);
-  });
-  return (<View style={styles.centeredView}>
-    <Pressable style={styles.button}>
-      <View>
-        <Text style={styles.text}>yaya is really cute</Text>
-      </View>
-    </Pressable>
-  </View>
+  const [buttonBgc, setButtonBgc] = useState("black");
+  const [image, setImage] = useState('https://www.whitehouse.gov/wp-content/uploads/2021/04/P20210303AS-1901-cropped.jpg')
+  return (
+    <PaperProvider>
+      <ScrollView
+        style={{
+
+        }}>
+        <View style={{ alignItems: 'center' }}>
+          <Image
+            source={{
+              uri: image,
+            }}
+            style={{
+              width: 200,
+              height: 200,
+              borderRadius: 50,
+              marginTop: 50,
+              borderWidth: 10
+
+            }}
+          />
+        </View>
+        <View style={styles.centeredView}>
+          <TextInput
+            defaultValue='asdfasdf'
+            textAlign='left'
+            style={{
+              width: '50%',
+              borderColor: 'black',
+              margin: 20,
+              borderWidth: 5,
+              borderStyle: 'solid',
+              borderRadius: 5,
+              // border
+
+            }} />
+          <Pressable
+            style={{ ...styles.button, backgroundColor: buttonBgc }}
+            onPressIn={() => {
+              setButtonBgc("grey")
+            }}
+            onPressOut={() => {
+              setButtonBgc("black")
+            }}
+            onPress={() => {
+              setImage('https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg')
+            }}
+          >
+            <View>
+              <Text style={{ ...styles.text }}>yaya is really cute</Text>
+            </View>
+          </Pressable>
+        </View>
+      </ScrollView >
+    </PaperProvider >
   );
 }
 
@@ -42,17 +70,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // paddingTop: "100px"
-    backgroundColor: "red",
-    height: "100%"
+    height: "50%"
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: 'black',
+    borderRadius: 20,
+    elevation: 50,
   },
   text: {
     fontSize: 16,
